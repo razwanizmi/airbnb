@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  # get 'listings/create'
+
+  # get 'listings/new'
+
+  # get 'listings/show'
+
+  # get 'listings/index'
+
+  # get 'listings/update'
+
+  # get 'listings/edit'
+
+  # get 'listings/destroy'
+
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
@@ -19,6 +33,7 @@ Rails.application.routes.draw do
   root 'users#index'
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   resources :users, only: [:show, :edit, :update, :destroy] 
+  resources :listings
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
