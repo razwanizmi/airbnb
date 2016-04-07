@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Picture:</strong>
-  <%= @profile.picture %>
+  <%= image_tag @profile.picture_url(:profile).to_s %>
 </p>
 
 <p>
