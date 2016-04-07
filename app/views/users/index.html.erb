@@ -8,16 +8,8 @@
   </div>
 </div>
 
-
-
-<div class="row">
-  <div class="col-md-4">
-  </div>
-
-  <div class="col-md-4">
-    <h1>This is my index page</h1>
-  </div>
-
-  <div class="col-md-4">
-  </div>
-</div>
+<% if current_user.profile == nil %>
+  <%= link_to "Create a profile", new_profile_path %>
+<% else %>
+  <%= link_to "View #{current_user.profile.name}'s profile", profile_path(current_user.profile.id) %>
+<% end %>

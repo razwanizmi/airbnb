@@ -28,7 +28,7 @@
         <td><%= listing.accommodates %></td>
         <td><%= listing.address %></td>
         <td><%= listing.city %></td>
-        <td><%= listing.user.email %></td>
+        <td><%= link_to "#{listing.user.profile.name}", profile_path(listing.user.profile) %></td>
         <td><%= link_to 'Show', listing %></td>
         <% if listing.user == current_user %>
           <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
