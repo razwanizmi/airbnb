@@ -46,6 +46,9 @@
   <strong>User:</strong>
   <%= @listing.user.email %>
 </p>
+
+<%= link_to 'Make A Reservation', new_reservation_path(@listing) %> |
+
 <% if current_user == @listing.user %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <% end %>
