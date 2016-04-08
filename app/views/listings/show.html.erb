@@ -2,6 +2,10 @@
 <p>Find me in app/views/listings/show.html.erb</p>
 
 <p>
+  <%= image_tag @listing.picture_url(:full).to_s %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @listing.name %>
 </p>

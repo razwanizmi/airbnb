@@ -22,13 +22,18 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= listing.name %></td>
+        <td>
+          <%= image_tag listing.picture_url(:thumb).to_s %>
+          <%= listing.name %></td>
         <td><%= listing.home_type %></td>
         <td><%= listing.room_type %></td>
         <td><%= listing.accommodates %></td>
         <td><%= listing.address %></td>
         <td><%= listing.city %></td>
-        <td><%= image_tag listing.user.profile.picture_url(:thumb).to_s %><%= link_to "#{listing.user.profile.name}", profile_path(listing.user.profile) %></td>
+        <td>
+          <%= image_tag listing.user.profile.picture_url(:thumb).to_s %>
+          <%= link_to "#{listing.user.profile.name}", profile_path(listing.user.profile) %>
+        </td>
         <td><%= link_to 'Show', listing %></td>
         <% if listing.user == current_user %>
           <td><%= link_to 'Edit', edit_listing_path(listing) %></td>

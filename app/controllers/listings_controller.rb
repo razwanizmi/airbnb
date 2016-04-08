@@ -25,7 +25,7 @@ class ListingsController < ApplicationController
 
   def update
     @listing = Listing.find(params[:id])
-    @listing.update(params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city))
+    @listing.update(params.require(:listing).permit(:picture, :name, :home_type, :room_type, :accommodates, :address, :city))
     if @listing.save
       redirect_to @listing
     else
