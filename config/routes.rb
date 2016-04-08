@@ -1,17 +1,5 @@
 Rails.application.routes.draw do
-  # get 'listings/create'
-
-  # get 'listings/new'
-
-  # get 'listings/show'
-
-  # get 'listings/index'
-
-  # get 'listings/update'
-
-  # get 'listings/edit'
-
-  # get 'listings/destroy'
+  resources :profiles, except: [:index, :destroy]
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]

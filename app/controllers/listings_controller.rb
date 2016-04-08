@@ -25,7 +25,7 @@ class ListingsController < ApplicationController
 
   def update
     @listing = Listing.find(params[:id])
-    @listing.update(params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city, :user_id))
+    @listing.update(params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city))
     if @listing.save
       redirect_to @listing
     else
@@ -35,10 +35,12 @@ class ListingsController < ApplicationController
 
   def edit
     @listing = Listing.find(params[:id])
+    redirect_to @listing if current_user != @listing.user
   end
 
   def destroy
     @listing = Listing.find(params[:id])
+    redirect to listings_path if current_user != @listing.user
     @listing.destroy
     redirect_to listings_path
   end

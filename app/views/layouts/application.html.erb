@@ -10,6 +10,7 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <title>Welcome to RazBnB</title>
   </head>
 
   <body>
@@ -22,13 +23,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="margin-top: 5px; font-size: 0.75em; color: lightblue">
             <% if signed_in? %>
-            Welcome back, <%= current_user.email%>
+            <a class="navbar-brand" href="/users/<%= current_user.id %>" style="margin-top: 5px; font-size: 0.75em; color: lightblue">Welcome back, <%= current_user.email%></a>
             <% else %>
-            Welcome, guest
+              <a class="navbar-brand" href="/sign_in" style="margin-top: 5px; font-size: 0.75em; color: lightblue">Welcome, guest</a>
             <% end %>
-          </a>
           <a class="navbar-brand" href="/listings" style="margin-top: 5px">All Listings</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -44,9 +43,11 @@
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
+<br><br><br>
     <section>
       <%= yield %>
     </section>
+    
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>

@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   include Clearance::User
 
   has_many :authentications, :dependent => :destroy
-  has_many :listing
+  has_many :listings
+  has_one :profile
 
   def self.create_with_auth_and_hash(authentication,auth_hash)
     create! do |u|
