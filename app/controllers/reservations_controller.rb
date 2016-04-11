@@ -26,6 +26,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
+        byebug
+        UserMailer.reservation_email(@reservation.listing.user).deliver
         format.html { redirect_to @reservation.listing notice: 'Reservation was successfully created.' }
       else
         format.html { render :new }
