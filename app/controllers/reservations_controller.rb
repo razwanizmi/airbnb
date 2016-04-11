@@ -2,13 +2,11 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   # GET /reservations
-  # GET /reservations.json
   def index
     @reservations = Reservation.all
   end
 
   # GET /reservations/1
-  # GET /reservations/1.json
   def show
   end
 
@@ -23,23 +21,19 @@ class ReservationsController < ApplicationController
   end
 
   # POST /reservations
-  # POST /reservations.json
   def create
     @reservation = Reservation.new(reservation_params)
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-        format.json { render :show, status: :created, location: @reservation }
+        format.html { redirect_to @reservation.listing notice: 'Reservation was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /reservations/1
-  # PATCH/PUT /reservations/1.json
   def update
     respond_to do |format|
       if @reservation.update(reservation_params)
@@ -53,12 +47,11 @@ class ReservationsController < ApplicationController
   end
 
   # DELETE /reservations/1
-  # DELETE /reservations/1.json
   def destroy
+    @listing = @reservation.listing
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to reservations_url, notice: 'Reservation was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to listing_path(@listing), notice: 'Reservation was successfully destroyed.' }
     end
   end
 
