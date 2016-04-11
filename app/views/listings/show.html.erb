@@ -1,55 +1,55 @@
-<h1>Listings#show</h1>
-<p>Find me in app/views/listings/show.html.erb</p>
+<div class="container">
 
-<p>
-  <strong>Pictures:</strong><br>
-  <% if @listing.pictures %>
-    <% @listing.pictures.each do |picture| %>
-    <%= image_tag picture.url(:full).to_s %>
+  <p>
+    <strong>Pictures:</strong><br>
+    <% if @listing.pictures %>
+      <% @listing.pictures.each do |picture| %>
+      <%= image_tag picture.url(:full).to_s %>
+      <% end %>
+    <% else %>
+      <p>No picture for this listing yet</p>
     <% end %>
-  <% else %>
-    <p>No picture for this listing yet</p>
+  </p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @listing.name %>
+  </p>
+
+  <p>
+    <strong>Home type:</strong>
+    <%= @listing.home_type %>
+  </p>
+
+  <p>
+    <strong>Room type:</strong>
+    <%= @listing.room_type %>
+  </p>
+
+  <p>
+    <strong>Accommodates:</strong>
+    <%= @listing.accommodates %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @listing.address %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @listing.city %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= @listing.user.email %>
+  </p>
+
+  <%= link_to 'Make A Reservation', new_reservation_path(@listing) %> |
+
+  <% if current_user == @listing.user %>
+  <%= link_to 'Edit', edit_listing_path(@listing) %> |
   <% end %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @listing.name %>
-</p>
-
-<p>
-  <strong>Home type:</strong>
-  <%= @listing.home_type %>
-</p>
-
-<p>
-  <strong>Room type:</strong>
-  <%= @listing.room_type %>
-</p>
-
-<p>
-  <strong>Accommodates:</strong>
-  <%= @listing.accommodates %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @listing.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @listing.city %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @listing.user.email %>
-</p>
-
-<%= link_to 'Make A Reservation', new_reservation_path(@listing) %> |
-
-<% if current_user == @listing.user %>
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<% end %>
-<%= link_to 'Back', listings_path %>
+  <%= link_to 'Back', listings_path %>
+</div>
