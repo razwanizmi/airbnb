@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav">
             <% if signed_in? && current_user.profile != nil %>
               <li><%= link_to "Profile", profile_path(current_user.profile) %></li>
-            <% else %>
+            <% elsif signed_in? && current_user.profile == nil %>
               <li><%= link_to "Profile", new_profile_path %></li>
             <% end %>
             <li><a href="/listings">Our Listings</a></li>

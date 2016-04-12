@@ -1,14 +1,45 @@
 <div class="container">
-<br>
-  <h2><%= @listing.name %></h2>
-  <p>by: <%= link_to "#{@listing.user.profile.name}", profile_path(@listing.user.profile) %></p>
-
+  <br>
+  <div class="row">
+    <div class="col-lg-10"><h2><%= @listing.name %></h2></div>
+    <div class="col-lg-2 text-right">
+      <p>by: <%= link_to "#{@listing.user.profile.name}", profile_path(@listing.user.profile) %> <%= image_tag @listing.user.profile.picture_url(:thumb).to_s, class:"img-circle" %></p>
+    </div>
+  </div>
+  <hr>
   <p>
     <strong>Pictures:</strong><br>
     <% if @listing.pictures %>
-      <% @listing.pictures.each do |picture| %>
-      <%= image_tag picture.url(:full).to_s %>
-      <% end %>
+      <div class="carousel slide" id="screenshot-carousel" data-rise="carousel"><!-- Variable Carousel -->
+        <ol class="carousel-indicators">
+          <% @listing.pictures.each_with_index do |picture, index| %>
+            <% if index == 0 %>
+              <li data-target="screenshot-carousel" data-slide-to="#{index}" class="active"></li>            
+            <% else %>
+              <li data-target="screenshot-carousel" data-slide-to="#{index}"></li>
+            <% end %>
+          <% end %>
+        </ol>
+        <div class="carousel-inner">
+          <% @listing.pictures.each_with_index do |picture, index| %>
+            <% if index == 0 %>
+              <div class="item active">
+                <%= image_tag picture.url(:full).to_s %>
+              </div>
+            <% else %>
+              <div class="item">
+                <%= image_tag picture.url(:full).to_s %>
+              </div>
+            <% end %>            
+          <% end %>
+        </div>
+        <a href="#screenshot-carousel" class="left carousel-control" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#screenshot-carousel" class="right carousel-control" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div><!-- End Variable Carousel -->
     <% else %>
       <p>No picture for this listing yet</p>
     <% end %>
@@ -74,15 +105,12 @@
             <% end %>
           </table>
         <% end %>
+        <div>
+          <%= link_to 'Make A Reservation', new_reservation_path(listing_id: @listing), class:"btn btn-success" %>
+        </div>
       </div>
     </div>
   </p>
-
-  <div>
-    <%= link_to 'Make A Reservation', new_reservation_path(listing_id: @listing), class:"btn btn-success" %>
-  </div>
-    
-
   <%= link_to 'Back', listings_path, class:"btn btn-info" %>
   <% if current_user == @listing.user %>
   <%= link_to 'Edit', edit_listing_path(@listing), class:"btn btn-warning" %>
