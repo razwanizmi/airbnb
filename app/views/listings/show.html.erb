@@ -47,6 +47,13 @@
 
   <p>
     <div class=row>
+      <div class="col-sm-2"><strong>Price per night:</strong></div>
+      <div class="col-sm-10"><%= @listing.price %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class=row>
       <div class="col-sm-2"><strong>Home type:</strong></div>
       <div class="col-sm-10"><%= @listing.home_type %></div>
     </div>
@@ -100,7 +107,11 @@
                 <td><%= reservation.user.profile.name %></td>
                 <td><%= reservation.from %></td>
                 <td><%= reservation.until %></td>
-                <td><%= link_to 'Delete', reservation, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td>
+                  <% if current_user == reservation.user %>
+                    <%= link_to 'Delete', reservation, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </table>

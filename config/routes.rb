@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :transactions, only: [:new, :create]
+
   resources :reservations, except: [:update, :edit]
   resources :profiles, except: [:index, :destroy]
 

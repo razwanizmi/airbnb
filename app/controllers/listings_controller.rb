@@ -50,5 +50,5 @@ private
 
 def listing_params
   params[:listing][:user_id] = current_user.id
-  params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city, :user_id, {pictures: []})
+  params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city, :price, :user_id, {pictures: []})
 end
