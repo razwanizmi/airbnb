@@ -1,10 +1,30 @@
+
+<div class="container">
+<br>
+<h2>Payment in progress for the following reservation:</h2>
+<hr>
+
+<div class="row"><!-- Details Row -->
+  <div class="col-lg-3">
+    <%= image_tag @reservation.listing.pictures.first.url(:thumb).to_s %>
+  </div>
+  <div class="col-lg-9">
+  <h3><%= @reservation.listing.name %></h3>
+  <p><%= @reservation.listing.city %></p>
+  <p>Price per night: <%= @reservation.listing.price %></p>
+  <p>Check-in date: <%= @reservation.from %></p>
+  <p>Check-out date: <%= @reservation.until %></p>
+  <p>Total price: <%= @reservation.total_price %></p>
+  </div>
+</div><!-- End Details Row -->
+<hr>
+  
 <div class="container">
   <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
-    <h2 class="mbs">New Transaction</h2>
     <%= form_tag transactions_path do%>
-      <p>Please enter your payment details:</p>
+      <p><strong>Please enter your payment details:</strong></p>
       <div id="dropin"></div>
-      <% byebug %>
+      <%= hidden_field_tag(:reservation_id, @reservation.id) %>
       <%=submit_tag "Pay #{@reservation.total_price}$", class: "button mt1" %>
     <%end%>
   </div>

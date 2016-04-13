@@ -26,9 +26,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        # UserMailer.reservation_email(@reservation.listing.user).deliver
+         # UserMailer.reservation_email(@reservation.listing.user).deliver
         format.html { redirect_to new_transaction_path(reservation_id: @reservation) }
-        # format.html { redirect_to @reservation.listing notice: 'Reservation was successfully created.' }
       else
         format.html { render :new }
       end

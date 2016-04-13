@@ -7,4 +7,13 @@ class Reservation < ActiveRecord::Base
     total_price = self.listing.price * (self.until - self.from)
     return total_price.to_f
   end
+
+  def paid!
+    self.paid = true
+    self.save!
+  end
+
+  def paid?
+    return true if self.paid
+  end
 end

@@ -108,6 +108,11 @@
                 <td><%= reservation.from %></td>
                 <td><%= reservation.until %></td>
                 <td>
+                  <% if reservation.paid? %>
+                    <p class="btn btn-primary">Paid</p>
+                  <% else %>
+                    <p class="btn btn-warning">Pending</p>
+                  <% end %>
                   <% if current_user == reservation.user %>
                     <%= link_to 'Delete', reservation, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
                   <% end %>
