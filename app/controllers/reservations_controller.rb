@@ -26,9 +26,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        byebug
-        UserMailer.reservation_email(@reservation.listing.user).deliver
-        format.html { redirect_to @reservation.listing notice: 'Reservation was successfully created.' }
+         # UserMailer.reservation_email(@reservation.listing.user).deliver
+        format.html { redirect_to new_transaction_path(reservation_id: @reservation) }
       else
         format.html { render :new }
       end
@@ -40,10 +39,8 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reservation }
       else
         format.html { render :edit }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
   end
