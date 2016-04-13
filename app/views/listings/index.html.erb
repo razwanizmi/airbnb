@@ -1,49 +1,33 @@
 <div class="container">
 
-  <p id="notice"><%= notice %></p>
-
   <h1>RazBnB Listings:</h1>
-
-  <table width="100%">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Home type</th>
-        <th>Room type</th>
-        <th>Accommodates</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>User</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @listings.each do |listing| %>
-        <tr>
-          <td><%= link_to "#{listing.name}", listing %></td>
-          <td><%= listing.name %></td>
-          <td><%= listing.home_type %></td>
-          <td><%= listing.room_type %></td>
-          <td><%= listing.accommodates %></td>
-          <td><%= listing.address %></td>
-          <td><%= listing.city %></td>
-          <td>
-            <% if listing.user.profile.picture %>
-            <%= image_tag listing.user.profile.picture_url(:thumb).to_s %>
-            <% end %>
-            <%= link_to "#{listing.user.profile.name}", profile_path(listing.user.profile) %>
-          </td>
-          <% if listing.user == current_user %>
-            <td><%= link_to 'Edit', edit_listing_path(listing), class:"btn btn-warning" %></td>
-            <td><%= link_to 'Delete', listing, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
   <br>
-
-  <%= link_to 'New Listing', new_listing_path %>
+  <% @listings.each do |listing| %>
+    <div class="row"><!-- Full Row -->      
+      <div class="col-lg-3"><!-- Picture Box-->
+        <%= image_tag listing.pictures.first.url(:thumb).to_s %>
+      </div><!-- End Picture Box -->
+      <div class="col-lg-6"><!-- Info Box -->
+        <h3><%= link_to "#{listing.name}", listing %></h3>
+        <p>Home type: <%= listing.home_type %></p>
+        <p>Room type: <%= listing.room_type %></p>
+        <p>Accomodates: <%= listing.accommodates %></p>
+        <p>Address: <%= listing.address %></p>
+        <p>City: <%= listing.city %></p>
+      </div><!-- End Info Box -->
+      <div class="col-lg-3"><!-- User Box -->
+        <p>Posted by:</p>
+        <p><%= image_tag listing.user.profile.picture_url(:thumb).to_s, class:"img-circle" %> <%= link_to "#{listing.user.profile.name}", profile_path(listing.user.profile) %></p>
+        <% if listing.user == current_user %>
+          <p>
+            <%= link_to 'Edit', edit_listing_path(listing), class:"btn btn-warning" %>
+            <%= link_to 'Delete', listing, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+          </p>
+        <% end %>          
+      </div><!-- End User Box -->
+      <hr>
+    </div><!-- End Full Row -->
+    <hr>
+  <% end %>
+    <%= link_to 'Create New Listing', new_listing_path, class:"btn btn-success" %>
 </div>
