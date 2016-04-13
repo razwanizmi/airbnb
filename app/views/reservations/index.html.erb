@@ -1,33 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Listing Reservations</h1>
+  <h1>Listing Reservations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>From</th>
-      <th>Until</th>
-      <th>Listing</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reservations.each do |reservation| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= reservation.from %></td>
-        <td><%= reservation.until %></td>
-        <td><%= reservation.listing_id %></td>
-        <td><%= reservation.user_id %></td>
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>From</th>
+        <th>Until</th>
+        <th>Listing</th>
+        <th>User</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.from %></td>
+          <td><%= reservation.until %></td>
+          <td><%= reservation.listing_id %></td>
+          <td><%= reservation.user_id %></td>
+          <td><%= link_to 'Show', reservation %></td>
+          <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+          <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Reservation', new_reservation_path %>
+  <br>
+
+  <%= link_to 'New Reservation', new_reservation_path %>
+</div>

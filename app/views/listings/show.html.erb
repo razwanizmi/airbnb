@@ -1,55 +1,90 @@
-<h1>Listings#show</h1>
-<p>Find me in app/views/listings/show.html.erb</p>
+<div class="container">
+<br>
+  <h2><%= @listing.name %></h2>
+  <p>by: <%= link_to "#{@listing.user.profile.name}", profile_path(@listing.user.profile) %></p>
 
-<p>
-  <strong>Pictures:</strong><br>
-  <% if @listing.pictures %>
-    <% @listing.pictures.each do |picture| %>
-    <%= image_tag picture.url(:full).to_s %>
+  <p>
+    <strong>Pictures:</strong><br>
+    <% if @listing.pictures %>
+      <% @listing.pictures.each do |picture| %>
+      <%= image_tag picture.url(:full).to_s %>
+      <% end %>
+    <% else %>
+      <p>No picture for this listing yet</p>
     <% end %>
-  <% else %>
-    <p>No picture for this listing yet</p>
+  </p>
+
+  <p>
+    <div class=row>
+      <div class="col-sm-2"><strong>Home type:</strong></div>
+      <div class="col-sm-10"><%= @listing.home_type %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Room type:</strong></div>
+      <div class="col-sm-10"><%= @listing.room_type %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Accommodates:</strong></div>
+      <div class="col-sm-10"><%= @listing.accommodates %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Address:</strong></div>
+      <div class="col-sm-10"><%= @listing.address %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>City:</strong></div>
+      <div class="col-sm-10"><%= @listing.city %></div>
+    </div>
+  </p>
+
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Current Reservations:</strong></div>
+      <div class="col-sm-10">
+        <% if @listing.reservations.count == 0 %>
+          <p>This listing currently has no reservations.</p>
+        <% else %>
+          <table class="table table-striped">
+            <tr>
+              <th>Guest</th>
+              <th>From</th>
+              <th>Until</th>
+              <th colspan="1"></th>
+            </tr>
+            <% @listing.reservations.each do |reservation| %>
+              <tr>
+                <td><%= reservation.user.profile.name %></td>
+                <td><%= reservation.from %></td>
+                <td><%= reservation.until %></td>
+                <td><%= link_to 'Delete', reservation, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </p>
+
+  <div>
+    <%= link_to 'Make A Reservation', new_reservation_path(listing_id: @listing), class:"btn btn-success" %>
+  </div>
+    
+
+  <%= link_to 'Back', listings_path, class:"btn btn-info" %>
+  <% if current_user == @listing.user %>
+  <%= link_to 'Edit', edit_listing_path(@listing), class:"btn btn-warning" %>
   <% end %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @listing.name %>
-</p>
-
-<p>
-  <strong>Home type:</strong>
-  <%= @listing.home_type %>
-</p>
-
-<p>
-  <strong>Room type:</strong>
-  <%= @listing.room_type %>
-</p>
-
-<p>
-  <strong>Accommodates:</strong>
-  <%= @listing.accommodates %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @listing.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @listing.city %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @listing.user.email %>
-</p>
-
-<%= link_to 'Make A Reservation', new_reservation_path(@listing) %> |
-
-<% if current_user == @listing.user %>
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<% end %>
-<%= link_to 'Back', listings_path %>
+</div>
