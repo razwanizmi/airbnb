@@ -2,6 +2,17 @@
 <p>Find me in app/views/listings/show.html.erb</p>
 
 <p>
+  <strong>Pictures:</strong><br>
+  <% if @listing.pictures %>
+    <% @listing.pictures.each do |picture| %>
+    <%= image_tag picture.url(:full).to_s %>
+    <% end %>
+  <% else %>
+    <p>No picture for this listing yet</p>
+  <% end %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @listing.name %>
 </p>

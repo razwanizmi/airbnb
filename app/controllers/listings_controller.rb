@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
   before_action :require_login, only: [:edit, :update, :destroy, :create, :new]
 
   def create
-    @listing = Listing.new(params.require(:listing).merge(user_id: current_user.id).permit(:name, :home_type, :room_type, :accommodates, :address, :city, :user_id))
+    @listing = Listing.new(listing_params)
     if @listing.save
       redirect_to @listing
     else
@@ -25,7 +25,8 @@ class ListingsController < ApplicationController
 
   def update
     @listing = Listing.find(params[:id])
-    @listing.update(params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city))
+    byebug
+    @listing.update(listing_params)
     if @listing.save
       redirect_to @listing
     else
@@ -44,4 +45,11 @@ class ListingsController < ApplicationController
     @listing.destroy
     redirect_to listings_path
   end
+end
+
+private
+
+def listing_params
+  params[:listing][:user_id] = current_user.id
+  params.require(:listing).permit(:name, :home_type, :room_type, :accommodates, :address, :city, :user_id, {pictures: []})
 end

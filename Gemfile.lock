@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 1778cd4577fdcbf4a383802b31dc7c1e4481e942
+  specs:
+    carrierwave (0.10.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -43,11 +52,6 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.2)
-    carrierwave (0.11.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     clearance (1.13.0)
       bcrypt
       email_validator (~> 1.4)
@@ -319,7 +323,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  carrierwave
+  carrierwave!
   clearance
   coffee-rails (~> 4.1.0)
   figaro
