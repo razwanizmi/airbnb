@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reservations, except: [:update, :edit]
   resources :profiles, except: [:index, :destroy]
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
