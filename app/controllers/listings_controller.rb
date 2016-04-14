@@ -20,7 +20,11 @@ class ListingsController < ApplicationController
   end
 
   def index
-    @listings = Listing.all
+    if params[:query].present?
+      @listings = Listing.search(params[:query])
+    else
+      @listings = Listing.all
+    end
   end
 
   def update

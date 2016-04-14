@@ -9,7 +9,6 @@ class TransactionsController < ApplicationController
     @result = Braintree::Transaction.sale(
               amount: @reservation.total_price,
               payment_method_nonce: params[:payment_method_nonce])
-    byebug
     if @result.success?
       @reservation.paid!
       Transaction.create(reservation_id: @reservation.id, braintree: @result.transaction.id)

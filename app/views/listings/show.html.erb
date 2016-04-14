@@ -112,6 +112,9 @@
                     <p class="btn btn-primary">Paid</p>
                   <% else %>
                     <p class="btn btn-warning">Pending</p>
+                    <% if current_user == reservation.user %>
+                      <%= link_to 'Pay Now', new_transaction_path(reservation_id: reservation), class:"btn btn-primary" %>
+                    <% end %>
                   <% end %>
                   <% if current_user == reservation.user %>
                     <%= link_to 'Delete', reservation, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
