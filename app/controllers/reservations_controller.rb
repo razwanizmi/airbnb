@@ -26,7 +26,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-         UserMailer.reservation_email(@reservation.listing.user).deliver
+         UserMailer.delay.reservation_email(@reservation.listing.user)
         format.html { redirect_to new_transaction_path(reservation_id: @reservation) }
       else
         format.html { render :new }

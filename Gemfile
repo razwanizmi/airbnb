@@ -32,6 +32,8 @@ gem 'fog'
 gem 'braintree', '~> 2.33.1'
 gem 'gon', '~> 5.1.2'
 gem 'searchkick'
+gem 'sidekiq'
+gem 'unicorn'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -41,6 +43,13 @@ gem 'searchkick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :production do
+  # Heroku
+  # ==================
+  gem 'rails_12factor' # Heroku Gem Supports
+  gem 'puma' # Using puma for
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
