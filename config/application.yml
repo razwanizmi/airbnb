@@ -1,0 +1,28 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+
+# Facebook dev credentials
+APP_KEY: "1562034100793192"
+APP_SECRET: "69aa2284ef3cc0dd10574f92d134697a"
+
+# AWS S3 credentials
+AMAZON ACCESS KEY: "AKIAIQA4F5IF2AJWPSBA"
+AMAZON SECRET KEY: "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"
+
+# Gmail credentials
+gmail_username: "myusernamelah"
+gmail_password: "humphreythecat"
+
+# Braintree configuration keys
+BRAINTREE_MERCHANT_ID: "h3q94grqstqspqbt"
+BRAINTREE_PUBLIC_KEY: "nvn9jcttk2hfbp56"
+BRAINTREE_PRIVATE_KEY: "1eda05de09ceb72d0c318c0a1320ae1f"
