@@ -20,7 +20,17 @@ class ListingsController < ApplicationController
   end
 
   def index
-    @listings = Listing.all
+    if params[:query].present?
+      @listings = Listing.search(params[:query])
+    elsif params[:user_id].present?
+      @listings = Listing.where(user_id: params[:user_id])
+      if User.find(params[:user_id]) == current_user
+        @can_add = true
+      end
+    else
+      @listings = Listing.all
+      @can_add = true
+    end
   end
 
   def update

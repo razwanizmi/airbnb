@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
-    @listing_id = params[:listing_id]
+    @listing = Listing.find(params[:listing_id])
     @reservation = Reservation.new
   end
 
@@ -26,7 +26,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-         # UserMailer.reservation_email(@reservation.listing.user).deliver
+         UserMailer.reservation_email(@reservation.listing.user).deliver
         format.html { redirect_to new_transaction_path(reservation_id: @reservation) }
       else
         format.html { render :new }

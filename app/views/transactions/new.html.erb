@@ -1,4 +1,3 @@
-
 <div class="container">
 <br>
 <h2>Payment in progress for the following reservation:</h2>
@@ -25,7 +24,7 @@
       <p><strong>Please enter your payment details:</strong></p>
       <div id="dropin"></div>
       <%= hidden_field_tag(:reservation_id, @reservation.id) %>
-      <%=submit_tag "Pay #{@reservation.total_price}$", class: "button mt1" %>
+      <%= submit_tag "Pay #{@reservation.total_price}$", class: "button mt1" %>
     <%end%>
   </div>
 </div>

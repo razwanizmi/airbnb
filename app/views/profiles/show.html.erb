@@ -1,7 +1,5 @@
 <div class="container">
-  <br>
-  <p id="notice"><%= notice %></p>
-
+  <br><br>
   <p>
     <%= image_tag @profile.picture_url(:profile).to_s, class:"img-circle" %>
   </p>
@@ -26,6 +24,8 @@
     <%= @profile.user.email %>
   </p>
 
-  <%= link_to 'Back', root_path, class:"btn btn-info" %>
-  <%= link_to 'Edit', edit_profile_path(@profile), class:"btn btn-warning" %>
+  <p><%= link_to "Listings by #{@profile.name}", listings_path(user_id: @profile.user.id)%><br></p>
+  <% if @profile.user == current_user %>
+    <%= link_to 'Edit', edit_profile_path(@profile), class:"btn btn-warning" %>
+  <% end %>
 </div>
