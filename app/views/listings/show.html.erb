@@ -1,0 +1,139 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-lg-10"><h2><%= @listing.name %></h2></div>
+    <div class="col-lg-2 text-right">
+      <p>by: <%= link_to "#{@listing.user.profile.name}", profile_path(@listing.user.profile) %> <%= image_tag @listing.user.profile.picture_url(:thumb).to_s, class:"img-circle" %></p>
+    </div>
+  </div>
+  <hr>
+  <p>
+    <strong>Pictures:</strong><br>
+    <% if @listing.pictures %>
+      <div class="carousel slide" id="screenshot-carousel" data-rise="carousel"><!-- Variable Carousel -->
+        <ol class="carousel-indicators">
+          <% @listing.pictures.each_with_index do |picture, index| %>
+            <% if index == 0 %>
+              <li data-target="screenshot-carousel" data-slide-to="#{index}" class="active"></li>            
+            <% else %>
+              <li data-target="screenshot-carousel" data-slide-to="#{index}"></li>
+            <% end %>
+          <% end %>
+        </ol>
+        <div class="carousel-inner">
+          <% @listing.pictures.each_with_index do |picture, index| %>
+            <% if index == 0 %>
+              <div class="item active">
+                <%= image_tag picture.url(:full).to_s %>
+              </div>
+            <% else %>
+              <div class="item">
+                <%= image_tag picture.url(:full).to_s %>
+              </div>
+            <% end %>            
+          <% end %>
+        </div>
+        <a href="#screenshot-carousel" class="left carousel-control" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#screenshot-carousel" class="right carousel-control" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div><!-- End Variable Carousel -->
+    <% else %>
+      <p>No picture for this listing yet</p>
+    <% end %>
+  </p>
+
+  <p>
+    <div class=row>
+      <div class="col-sm-2"><strong>Price per night:</strong></div>
+      <div class="col-sm-10"><%= @listing.price %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class=row>
+      <div class="col-sm-2"><strong>Home type:</strong></div>
+      <div class="col-sm-10"><%= @listing.home_type %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Room type:</strong></div>
+      <div class="col-sm-10"><%= @listing.room_type %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Accommodates:</strong></div>
+      <div class="col-sm-10"><%= @listing.accommodates %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Address:</strong></div>
+      <div class="col-sm-10"><%= @listing.address %></div>
+    </div>
+  </p>
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>City:</strong></div>
+      <div class="col-sm-10"><%= @listing.city %></div>
+    </div>
+  </p>
+
+
+  <p>
+    <div class="row">
+      <div class="col-sm-2"><strong>Current Reservations:</strong></div>
+      <div class="col-sm-10">
+        <% if @listing.reservations.count == 0 %>
+          <p>This listing currently has no reservations.</p>
+        <% else %>
+          <table class="table table-striped">
+            <tr>
+              <th>Guest</th>
+              <th>From</th>
+              <th>Until</th>
+              <th colspan="1"></th>
+            </tr>
+            <% @listing.reservations.each do |reservation| %>
+              <tr>
+                <td><%= reservation.user.profile.name %></td>
+                <td><%= reservation.from %></td>
+                <td><%= reservation.until %></td>
+                <td>
+                  <% if reservation.paid? %>
+                    <p class="btn btn-info">Paid</p>
+                  <% else %>
+                    <p class="btn btn-warning">Pending</p>
+                    <% if current_user == reservation.user %>
+                      <%= link_to 'Pay Now', new_transaction_path(reservation_id: reservation), class:"btn btn-info" %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user == reservation.user %>
+                    <%= link_to 'Delete', reservation, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        <% end %>
+        <div>
+          <% if @listing.user != current_user %>
+            <%= link_to 'Make A Reservation', new_reservation_path(listing_id: @listing), class:"btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </p>
+  <%= link_to 'Back', listings_path, class:"btn btn-info" %>
+  <% if current_user == @listing.user %>
+  <%= link_to 'Edit', edit_listing_path(@listing), class:"btn btn-warning" %>
+  <% end %>
+</div>

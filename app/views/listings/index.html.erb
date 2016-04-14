@@ -1,0 +1,37 @@
+<div class="container">
+  <% if @listings.length == 0 %>
+    <br><h3>No listings found</h3><br>
+  <% else %>
+    <br><br>
+    <% @listings.each do |listing| %>
+      <div class="row"><!-- Full Row -->      
+        <div class="col-lg-3"><!-- Picture Box-->
+          <%= image_tag listing.pictures.first.url(:thumb).to_s %>
+        </div><!-- End Picture Box -->
+        <div class="col-lg-6"><!-- Info Box -->
+          <h3><%= link_to "#{listing.name}", listing %></h3>
+          <p>Home type: <%= listing.home_type %></p>
+          <p>Room type: <%= listing.room_type %></p>
+          <p>Accomodates: <%= listing.accommodates %></p>
+          <p>Address: <%= listing.address %></p>
+          <p>City: <%= listing.city %></p>
+        </div><!-- End Info Box -->
+        <div class="col-lg-3"><!-- User Box -->
+          <p>Posted by:</p>
+          <p><%= image_tag listing.user.profile.picture_url(:thumb).to_s, class:"img-circle" %> <%= link_to "#{listing.user.profile.name}", profile_path(listing.user.profile) %></p>
+          <% if listing.user == current_user %>
+            <p>
+              <%= link_to 'Edit', edit_listing_path(listing), class:"btn btn-warning" %>
+              <%= link_to 'Delete', listing, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+            </p>
+          <% end %>          
+        </div><!-- End User Box -->
+        <hr>
+      </div><!-- End Full Row -->
+      <hr>
+    <% end %>
+  <% end %>
+  <% if @can_add %>
+    <%= link_to 'Create A New Listing', new_listing_path, class:"btn btn-success" %>
+  <% end %>
+</div>
