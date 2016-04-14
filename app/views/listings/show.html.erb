@@ -109,11 +109,11 @@
                 <td><%= reservation.until %></td>
                 <td>
                   <% if reservation.paid? %>
-                    <p class="btn btn-primary">Paid</p>
+                    <p class="btn btn-info">Paid</p>
                   <% else %>
                     <p class="btn btn-warning">Pending</p>
                     <% if current_user == reservation.user %>
-                      <%= link_to 'Pay Now', new_transaction_path(reservation_id: reservation), class:"btn btn-primary" %>
+                      <%= link_to 'Pay Now', new_transaction_path(reservation_id: reservation), class:"btn btn-info" %>
                     <% end %>
                   <% end %>
                   <% if current_user == reservation.user %>
@@ -125,7 +125,9 @@
           </table>
         <% end %>
         <div>
-          <%= link_to 'Make A Reservation', new_reservation_path(listing_id: @listing), class:"btn btn-success" %>
+          <% if @listing.user != current_user %>
+            <%= link_to 'Make A Reservation', new_reservation_path(listing_id: @listing), class:"btn btn-success" %>
+          <% end %>
         </div>
       </div>
     </div>

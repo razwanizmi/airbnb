@@ -7,11 +7,16 @@
       <%= render partial: '/users/form', object: form %>
 
       <div class="submit-field">
-        <%= form.submit %>
-      </div>
+        <%= form.submit class:"btn btn-success" %>
+      </div><br>
+
+  <a href="/auth/facebook" class="btn btn-primary">
+    <i class="fa fa-facebook"/>
+    Sign up with Facebook
+  </a><br><br>
 
       <div class="other-links">
-        <%= link_to t(".sign_in"), sign_in_path %>
+        <p>Already signed up? <%= link_to t(".sign_in"), sign_in_path %></p>
       </div>
     <% end %>
   </div>

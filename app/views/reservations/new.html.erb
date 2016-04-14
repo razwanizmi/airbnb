@@ -1,7 +1,18 @@
 <div class="container">
-  <h1>New Reservation</h1>
+  <br><h2>New Reservation</h2><hr>
 
+  <div class="row"><!-- Details Row -->
+    <div class="col-lg-3">
+      <%= image_tag @listing.pictures.first.url(:thumb).to_s %>
+    </div>
+    <div class="col-lg-9">
+    <h3><%= @listing.name %></h3>
+    <p><%= @listing.city %></p>
+    <p>Price per night: <%= @listing.price %></p>
+    </div>
+  </div><!-- End Details Row -->
+  <br>
   <%= render 'form' %>
 
-  <%= link_to 'Back', listing_path(@listing_id) %>
+  <br><%= link_to 'Back', listing_path(@listing), class:"btn btn-info" %>
 </div>
