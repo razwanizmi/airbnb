@@ -20,7 +20,7 @@
     <%= f.date_select :until %>
   </div><br>
 
-    <%= f.hidden_field :listing_id, value:@listing_id %>
+    <%= f.hidden_field :listing_id, value:@listing.id %>
 
     <%= f.hidden_field :user_id, value:current_user.id %>
 
