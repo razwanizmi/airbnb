@@ -35,6 +35,7 @@ class ListingsController < ApplicationController
 
   def update
     @listing = Listing.find(params[:id])
+    byebug
     @listing.update(listing_params)
     if @listing.save
       redirect_to @listing

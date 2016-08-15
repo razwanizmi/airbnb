@@ -12,7 +12,6 @@ class TransactionsController < ApplicationController
     if @result.success?
       @reservation.paid!
       Transaction.create(reservation_id: @reservation.id, braintree: @result.transaction.id)
-      byebug
       redirect_to @reservation.listing
     else
       flash[:alert] = "Something went wrong while processing your transaction. Please try again!"
